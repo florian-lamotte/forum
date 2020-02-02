@@ -19,10 +19,10 @@ if(isset($_POST['connexion'])){
 		$obj_utilisateur->profil($utilisateur);
 		header('Location: /forum');
 	}
-} else if(isset($_GET['deconnexion'])){
+} else if(isset($_GET['action']) && $_GET['action'] == 'deconnexion'){
 	session_destroy();
 	header('Location: /forum');
-} else if(isset($_GET['sujet'])) {
+} else if(isset($_GET['action']) && $_GET['action'] == 'sujet') {
 	if(isset($_POST['valider']) && isset($_POST['message']) && !empty($_POST['message'])){
 		$message = new Message([
 			'message' => $_POST['message'],
@@ -37,7 +37,7 @@ if(isset($_POST['connexion'])){
 	$listeMessages = $obj_message->listeMessages($_GET['sujet']);
 
 	include('templates/messages.php');
-} else if(isset($_GET['inscription'])) {
+} else if(isset($_GET['action']) && $_GET['action'] == 'inscription') {
 	include('templates/inscription.php');
 
 	if(isset($_POST['valider']) && isset($_POST['pseudo']) && isset($_POST['email']) && isset($_POST['pass']) && !empty($_POST['pseudo']) && !empty($_POST['email']) && !empty($_POST['pass'])){
@@ -49,7 +49,7 @@ if(isset($_POST['connexion'])){
 
 		$obj_utilisateur->ajouter($utilisateur);
 	}
-} else if(isset($_GET['creer-sujet'])) {
+} else if(isset($_GET['action']) && $_GET['action'] == 'creer-sujet') {
 	if(isset($_POST['valider']) && isset($_POST['titre']) && !empty($_POST['titre'])){
 		$sujet = new Sujet([
 			'titre' => $_POST['titre'],
@@ -57,7 +57,7 @@ if(isset($_POST['connexion'])){
 		]);
 
 		$obj_sujet->creerSujet($sujet);
-		header('Location: /forum/?sujet=' . $obj_sujet->dernierSujet($_SESSION['id']));
+		header('Location: /forum/?action=sujet&sujet=' . $obj_sujet->dernierSujet($_SESSION['id']));
 	}
 
 	include('templates/creer-sujet.php');

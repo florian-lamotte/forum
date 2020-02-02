@@ -4,7 +4,9 @@
 	ob_start();
 ?>
 
-<?php if(isset($_SESSION['pseudo'])){ ?> <p><a href="?creer-sujet">Créer un sujet</a></p> <?php } ?>
+<?php if(isset($_SESSION['pseudo'])){ ?> 
+	<p><a href="?action=creer-sujet">Créer un sujet</a></p> 
+<?php } ?>
 
 <table>
 	<tr>
@@ -14,10 +16,15 @@
 	</tr>
 	<?php foreach($listeSujets as $sujet){ ?>
 	<tr>
-		<td><a href="?sujet=<?= $sujet->id() ?>"><?= $sujet->titre() ?></a></td>
+		<td><a href="?action=sujet&sujet=<?= $sujet->id() ?>"><?= $sujet->titre() ?></a></td>
 		<td><?= $obj_utilisateur->detailsUtilisateur($sujet->id_utilisateur())->pseudo() ?></td>
-		<td><?php try { echo $obj_sujet->nombreReponses($sujet->id()); } 
-		catch(TypeError $e){ echo 'Erreur'; } ?></td>
+		<td><?php 
+			try { 
+				echo $obj_sujet->nombreReponses($sujet->id()); 
+			} catch(TypeError $e){ 
+				echo 'Erreur'; 
+			} 
+		?></td>
 	</tr>
 	<?php } ?>
 </table>

@@ -7,14 +7,16 @@
 
 	<body>
 		<?php if(!isset($_SESSION['pseudo'])){ ?>
-			<p><form action="" method="post">
-				<input type="text" name="pseudo" placeholder="Pseudonyme">
-				<input type="text" name="pass" placeholder="Mot de passe">
-				<input type="submit" name="connexion">
-				<a href="?inscription">Inscription</a>
-			</form></p>
+			<p>
+				<form action="" method="post">
+					<input type="text" name="pseudo" placeholder="Pseudonyme">
+					<input type="text" name="pass" placeholder="Mot de passe">
+					<input type="submit" name="connexion">
+				</form>
+				<a href="?action=inscription">Inscription</a>
+			</p>
 		<?php } else { ?>
-			<a href="?deconnexion">Déconnexion</a>
+			<a href="?action=deconnexion">Déconnexion</a>
 		<?php } ?>
 
 		<?= $contenu ?>
