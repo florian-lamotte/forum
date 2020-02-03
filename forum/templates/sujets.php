@@ -5,7 +5,7 @@
 ?>
 
 <?php if(isset($_SESSION['pseudo'])){ ?> 
-	<p><a href="?action=creer-sujet">Créer un sujet</a></p> 
+	<p><a href="?action=creer_sujet">Créer un sujet</a></p> 
 <?php } ?>
 
 <table>
